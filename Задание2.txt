@@ -1,0 +1,31 @@
+-python-
+
+
+def main():
+    # Определяем курсы обмена (курс относительно базовой валюты, например, USD)
+    exchange_rates = {
+        'USD': 1.0,    # Базовая валюта
+        'EUR': 0.85,   # 1 USD = 0.85 EUR
+        'JPY': 110.0,  # 1 USD = 110 JPY
+        'GBP': 0.75,   # 1 USD = 0.75 GBP
+        'AUD': 1.35    # 1 USD = 1.35 AUD
+    }
+    
+    # Запрашиваем у пользователя сумму в базовой валюте (USD)
+    try:
+        amount_usd = float(input("Введите сумму в USD: "))
+    except ValueError:
+        print("Пожалуйста, введите корректное число.")
+        return
+    
+    # Конвертируем введенную сумму в другие валюты и выводим результаты
+    print("\nКонвертация:")
+    for currency, rate in exchange_rates.items():
+        converted_amount = amount_usd * rate
+        print(f"{amount_usd} USD = {converted_amount:.2f} {currency}")
+
+if __name__ == "__main__":
+    main()
+
+-bash-
+python currency_converter.py

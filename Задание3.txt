@@ -1,0 +1,46 @@
+Все так же Питон
+import random
+import string
+
+def generate_password(length):
+    if length < 8 or length > 12:
+        raise ValueError("Длина пароля должна быть от 8 до 12 символов.")
+
+    # Определяем символы для пароля
+    lower = string.ascii_lowercase  # строчные буквы
+    upper = string.ascii_uppercase  # заглавные буквы
+    digits = string.digits          # цифры
+    special = string.punctuation     # специальные символы
+
+    # Объединяем все символы
+    all_characters = lower + upper + digits + special
+
+    # Генерируем пароль
+    password = [
+        random.choice(lower),    # добавляем хотя бы одну строчную букву
+        random.choice(upper),    # добавляем хотя бы одну заглавную букву
+        random.choice(digits),    # добавляем хотя бы одну цифру
+        random.choice(special)     # добавляем хотя бы один специальный символ
+    ]
+
+    # Заполняем оставшуюся длину пароля случайными символами
+    password += random.choices(all_characters, k=length - 4)
+
+    # Перемешиваем символы в пароле
+    random.shuffle(password)
+
+    return ''.join(password)
+
+def main():
+    try:
+        length = int(input("Введите длину пароля (от 8 до 12 символов): "))
+        password = generate_password(length)
+        print(f"Сгенерированный пароль: {password}")
+    except ValueError as e:
+        print(e)
+
+if __name__ == "__main__":
+    main()
+
+-bash-
+python password_generator.py

@@ -1,0 +1,107 @@
+-Питон-
+
+import random
+
+def display_hangman(lives):
+    stages = [
+        '''
+           -----
+           |   |
+           |   O
+           |  /|\\
+           |  / \\
+           -
+        ''',
+        '''
+           -----
+           |   |
+           |   O
+           |  /|\\
+           |  /
+           -
+        ''',
+        '''
+           -----
+           |   |
+           |   O
+           |  /|
+           |  
+           -
+        ''',
+        '''
+           -----
+           |   |
+           |   O
+           |   |
+           |  
+           -
+        ''',
+        '''
+           -----
+           |   |
+           |   O
+           |  
+           |  
+           -
+        ''',
+        '''
+           -----
+           |   |
+           |   
+           |  
+           |  
+           -
+        ''',
+        '''
+           -----
+           |   |
+           |   
+           |  
+           |  
+           -
+        '''
+    ]
+    return stages[lives]
+
+def main():
+    words = ['python', 'hangman', 'programming', 'development', 'challenge']
+    word_to_guess = random.choice(words)
+    guessed_letters = []
+    lives = 6
+
+    print("Добро пожаловать в игру 'Виселица'!")
+    
+    while lives > 0:
+        print(display_hangman(lives))
+        print(f"Слово: {' '.join([letter if letter in guessed_letters else '_' for letter in word_to_guess])}")
+        print(f"Осталось жизней: {lives}")
+
+        guess = input("Введите букву: ").lower()
+        
+        if guess in guessed_letters:
+            print("Вы уже вводили эту букву.")
+            continue
+        
+        guessed_letters.append(guess)
+        
+        if guess in word_to_guess:
+            print("Правильно!")
+        else:
+            print("Неправильно!")
+            lives -= 1
+        
+        if all(letter in guessed_letters for letter in word_to_guess):
+            print(f"Поздравляем! Вы угадали слово: {word_to_guess}")
+            break
+    else:
+        print(display_hangman(lives))
+        print(f"Вы проиграли! Загаданное слово было: {word_to_guess}")
+
+if __name__ == "__main__":
+    main()
+
+
+
+-bash-
+
+python hangman.py
